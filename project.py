@@ -3,11 +3,22 @@
 # Project
 #
 #
-# Date: March 11, 2019
+# Date: March 24, 2019
 #
 
-def read_file(filename):
+def read_schedule(filename):
     fn = open(filename, 'r')
     lines = fn.readlines()
     return lines
-        
+
+# The input file for the graph is in the form of:
+# place1 place2 distance
+# where distance is in minutes
+def get_graph():
+    fn = open('campus_graph.txt', 'r')
+    lines = fn.readlines()
+    return lines
+
+spots = get_graph()
+
+print spots
