@@ -2,7 +2,7 @@
 Project Specifications
 
 # Description
-TODO
+This program reads in a class schedule and informs the user how long it will take to get from one building to another.
 
 # Authors
 Aaron Klabunde
