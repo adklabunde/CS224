@@ -6,6 +6,7 @@
 # Date: March 24, 2019
 #
 import math
+from graph import Graph
 
 def read_schedule(filename):
     fn = open(filename, 'r')
@@ -34,5 +35,10 @@ def calc_time(distance):
 # where distance is in minutes
 def get_graph():
     fn = open('campus_graph.txt', 'r')
-    lines = fn.readlines()
-    return lines
+    lines = fn.read().splitlines()
+    tuples = [(l[0], l[1]) for l in [line.split() for line in lines]]
+    return tuples
+
+g = Graph(get_graph())
+
+print g.find_path('1', '4')
