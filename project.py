@@ -7,6 +7,7 @@
 #
 import math
 from graph import Graph
+from graphics import *
 
 def read_schedule(filename):
     fn = open(filename, 'r')
@@ -42,3 +43,10 @@ def get_graph():
 g = Graph(get_graph())
 
 print g.find_path('1', '4')
+
+# Outputs a graphic window of the campus map image
+def get_window():
+    win = GraphWin("gps", 800, 500)
+    map_image = Image(Point(385, 110), 'map.gif')
+    map_image.draw(win)
+    win.mainloop()
