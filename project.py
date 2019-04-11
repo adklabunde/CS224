@@ -9,12 +9,12 @@ import math
 from graph import Graph
 from graphics import *
 
-def read_schedules():
-    file = "student1.txt"
-    fn = open("students/" + file, 'r')
+def read_schedule():
+    day = "monday.txt"
+    student_num = "student" + "1";
+    fn = open("students/" + student_num + '/' + day, 'r')
     lines = fn.read().splitlines()
     return lines
-
 
 # takes in the start and end points of two x,y coordinates and returns the distance in meters
 def calc_distance(startpoint, endpoint):
@@ -51,7 +51,7 @@ def get_window():
 
 def main():
     campus_graph = Graph(get_graph())
-    schedule = read_schedules()
+    schedule = read_schedule()
     paths = [(p[0], p[1]) for p in [path.split() for path in schedule]]
     for p in paths:
         print campus_graph.find_path(p[0], p[1])
