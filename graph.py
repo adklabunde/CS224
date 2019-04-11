@@ -19,15 +19,15 @@ class Graph(object):
             self._graph[node2].add(node1)
 
 
-    def find_path(self, node1, node2, path=[]):
-        path = path + [node1]
-        if node1 == node2:
+    def find_path(self, start, finish, path=[]):
+        path = path + [start]
+        if start == finish:
             return path
-        if node1 not in self._graph:
+        if start not in self._graph:
             return None
-        for node in self._graph[node1]:
+        for node in self._graph[start]:
             if node not in path:
-                new_path = self.find_path(node, node2, path)
+                new_path = self.find_path(node, finish, path)
                 if new_path:
                     return new_path
         return None

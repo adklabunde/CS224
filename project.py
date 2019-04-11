@@ -9,10 +9,12 @@ import math
 from graph import Graph
 from graphics import *
 
-def read_schedule(filename):
-    fn = open(filename, 'r')
-    lines = fn.readlines()
+def read_schedules():
+    file = "student1.txt"
+    fn = open("students/" + file, 'r')
+    lines = fn.read().splitlines()
     return lines
+
 
 # takes in the start and end points of two x,y coordinates and returns the distance in meters
 def calc_distance(startpoint, endpoint):
@@ -40,13 +42,19 @@ def get_graph():
     tuples = [(l[0], l[1]) for l in [line.split() for line in lines]]
     return tuples
 
-g = Graph(get_graph())
-
-print g.find_path('1', '4')
-
 # Outputs a graphic window of the campus map image
 def get_window():
     win = GraphWin("gps", 800, 500)
     map_image = Image(Point(385, 110), 'map.gif')
     map_image.draw(win)
     win.mainloop()
+
+def main():
+    campus_graph = Graph(get_graph())
+    schedule = read_schedules()
+    paths = [(p[0], p[1]) for p in [path.split() for path in schedule]]
+    for p in paths:
+        print campus_graph.find_path(p[0], p[1])
+
+if __name__ == '__main__':
+    main()
