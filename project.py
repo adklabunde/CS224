@@ -6,7 +6,7 @@
 # Date: March 24, 2019
 #
 from graph import Graph
-from graphics import *
+from projectgraphics import *
 
 def read_schedule():
     day = "monday.txt"
@@ -24,12 +24,17 @@ def get_graph():
     tuples = [(l[0], l[1]) for l in [line.split() for line in lines]]
     return tuples
 
-# Outputs a graphic window of the campus map image
-def get_window():
-    win = GraphWin("gps", 800, 500)
-    map_image = Image(Point(385, 110), 'map.gif')
-    map_image.draw(win)
-    win.mainloop()
+def set_window(start, end):
+    p = Plot(start, end)
+    win = p.get_window()
+    p1 = p.find_coords()
+    rec = p.plot_point(p1)
+    p2 = p.find_coords(1)   # if given a parameter will use endpoint
+    rec2 = p.plot_point(p2)
+    p.draw_rec(rec2, win)
+    p.draw_rec(rec, win)
+    win.getMouse()          # click anywhere in the window to close
+    win.close()
 
 def main():
     campus_graph = Graph(get_graph())
@@ -37,6 +42,9 @@ def main():
     paths = [(p[0], p[1]) for p in [path.split() for path in schedule]]
     for p in paths:
         print campus_graph.find_path(p[0], p[1])
+
+    # still have to plug in the number from the students file
+    set_window(2, 4)
 
 if __name__ == '__main__':
     main()
