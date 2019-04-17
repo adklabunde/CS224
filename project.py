@@ -28,11 +28,9 @@ def set_window(start, end):
     p = Plot(start, end)
     win = p.get_window()
     p1 = p.find_coords()
-    rec = p.plot_point(p1)
+    p.draw_rec(p1, win)
     p2 = p.find_coords(1)   # if given a parameter will use endpoint
-    rec2 = p.plot_point(p2)
-    p.draw_rec(rec2, win)
-    p.draw_rec(rec, win)
+    p.draw_rec(p2, win)
     win.getMouse()          # click anywhere in the window to close
     win.close()
 
@@ -44,7 +42,7 @@ def main():
         print campus_graph.find_path(p[0], p[1])
 
     # still have to plug in the number from the students file
-    set_window(2, 4)
+    set_window(18, 9)
 
 if __name__ == '__main__':
     main()
