@@ -24,13 +24,10 @@ def get_graph():
     tuples = [(l[0], l[1]) for l in [line.split() for line in lines]]
     return tuples
 
-def set_window(start, end):
-    p = Plot(start, end)
+def set_window(path):
+    p = Plot(path)
     win = p.get_window()
-    p1 = p.find_coords()
-    p.draw_rec(p1, win)
-    p2 = p.find_coords(1)   # if given a parameter will use endpoint
-    p.draw_rec(p2, win)
+    p.setuppath(win)
     win.getMouse()          # click anywhere in the window to close
     win.close()
 
@@ -42,7 +39,10 @@ def main():
         print campus_graph.find_path(p[0], p[1])
 
     # still have to plug in the number from the students file
-    set_window(18, 9)
+    path1 = [2, 26, 5]
+    set_window(path1)
+    path2 = {14, 19, 16}
+    set_window(path2)
 
 if __name__ == '__main__':
     main()
