@@ -3,15 +3,16 @@
 # Project
 #
 #
-# Date: March 24, 2019
+# Date: April 19, 2019
 #
 from graph import Graph
 from projectgraphics import *
 
+# Get student number and day of the week
 def read_schedule():
-    day = "monday.txt"
-    student_num = "student" + "1";
-    fn = open("students/" + student_num + '/' + day, 'r')
+    student_num = "student" + raw_input("Student Number: ")
+    user_day = raw_input("Day: ").lower() + ".txt"
+    fn = open("students/" + student_num + '/' + user_day, 'r')
     lines = fn.read().splitlines()
     return lines
 
@@ -34,15 +35,18 @@ def set_window(path):
 def main():
     campus_graph = Graph(get_graph())
     schedule = read_schedule()
-    paths = [(p[0], p[1]) for p in [path.split() for path in schedule]]
-    for p in paths:
-        print campus_graph.find_path(p[0], p[1])
+    student_path = [(p[0], p[1]) for p in [path.split() for path in schedule]]
+    for path in student_path:
+        user_route = campus_graph.find_path(path[0], path[1])
+        user_route = map(int, user_route)
+        print user_route
+        set_window(user_route)
 
-    # still have to plug in the number from the students file
-    path1 = [2, 26, 5]
-    set_window(path1)
-    path2 = {14, 19, 16}
-    set_window(path2)
+    #path1 = [2, 26, 5]
+    #print path1
+    #set_window(path1)
+    #path2 = [14, 19, 16]
+    #set_window(path2)
 
 if __name__ == '__main__':
     main()
