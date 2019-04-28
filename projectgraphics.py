@@ -3,13 +3,6 @@ from graphics import *
 
 class Plot():
 
-    # Outputs a graphic window of the campus map image
-    def get_window(self):
-        win = GraphWin("route calculator", 800, 500)
-        map_image = Image(Point(385, 110), 'map.gif')
-        map_image.draw(win)
-        return win
-
     # finds the corresponding x,y coords for each node number
     def find_coords(self, curnode):
         # list containing the window coordinates for each building
@@ -29,7 +22,7 @@ class Plot():
         r = Rectangle(Point(coords[0], coords[1]), Point(coords[0] + 10, coords[1] + 10))
         r.setFill("white")
         r.draw(win)
-        return r.getCenter()
+        return r
 
     def draw_line(self, p1, p2, win):
         line = Line(Point(p1[0], p1[1]), Point(p2[0], p2[1]))
@@ -42,11 +35,12 @@ class Plot():
         count = 0
         for n in self.path:
             p1 = self.find_coords(n)
-            p1cent = self.draw_rec(p1, win)
-            if count != 0:
-                self.draw_line(p1, p2, win)
-            p2 = p1
-            count = count + 1
+            if p1 != None:
+                self.draw_rec(p1, win)
+                if count != 0:
+                    self.draw_line(p1, p2, win)
+                p2 = p1
+                count = count + 1
 
     def __init__(self, path):
         self.path = path
