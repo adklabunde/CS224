@@ -87,11 +87,55 @@ def build_shortest_path(graph, start, target):
         unvisited_queue = [(v.get_distance(),v) for v in graph if not v.visited]
         heapq.heapify(unvisited_queue)
 
+# creates the start up window
+def start_menu():
+    win = GraphWin("welcome:)", 800, 500)
+    win.setBackground('dark red')
+    stripe = Rectangle(Point(0, 100), Point(800, 250))
+    stripe.setFill('black')
+    stripe.draw(win)
+    t = Text(Point(400, 175), "START")
+    t.setSize(20)
+    t.setStyle('bold')
+    t.setTextColor('white')
+    t.draw(win)
+
+    # get the student number and day from the user
+    ui = Text(Point(400, 300), 'Please enter your student number: ')
+    ui.draw(win)
+    e = Entry(Point(580, 300), 10)
+    e.draw(win)
+    win.getMouse()
+    st_num = e.getText()
+    e.setFill('green')
+    ui2 = Text(Point(400, 370), 'Enter the day: ')
+    ui2.draw(win)
+    e2 = Entry(Point(580, 370), 10)
+    e2.draw(win)
+    win.getMouse()
+    day = e2.getText().lower()
+    e2.setFill('green')
+
+    # read in data from corresponding student number and day entered in text files
+    lines = []
+    try:
+        student_num = "student" + st_num
+        user_day = day.lower() + ".txt"
+        fn = open("students/" + student_num + '/' + user_day, 'r')
+        lines = fn.read().splitlines()
+    except IOError:
+        e.setFill('red')
+        e2.setFill('red')
+        e.setText('Invalid input')
+        e2.setText('Invalid input')
+    win.getMouse()
+    win.close()
+    return lines
 
 def main():
     path_list = []
     campus_graph = Graph(get_graph())
-    student_schedule = read_schedule()
+    student_schedule = start_menu()
     student_path = [(p[0], p[1]) for p in [path.split() for path in student_schedule]]
 
     for path in student_path:

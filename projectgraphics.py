@@ -30,17 +30,27 @@ class Plot():
         line.setFill("red")
         line.draw(win)
 
-    # sets up
+    # sets up path to draw the line
     def setuppath(self, win):
         count = 0
+        p1 = (0, 0)
         for n in self.path:
             p1 = self.find_coords(n)
             if p1 != None:
+                if count == 0:
+                    t = Text(Point(p1[0], p1[1]), 'START')
+                    t.setStyle('bold')
+                    t.setTextColor('red')
+                    t.draw(win)
                 self.draw_rec(p1, win)
                 if count != 0:
                     self.draw_line(p1, p2, win)
                 p2 = p1
-                count = count + 1
+                count += 1
+        t = Text(Point(p1[0], p1[1]), 'END')
+        t.setStyle('bold')
+        t.setTextColor('red')
+        t.draw(win)
 
     def __init__(self, path):
         self.path = path
