@@ -8,15 +8,6 @@ from graph import Graph
 from projectgraphics import *
 import heapq
 
-# Get student number and day of the week
-# Read the schedule from the txt file pertaining to the day provided
-def read_schedule():
-    student_num = "student" + raw_input("Student Number: ")
-    student_day = raw_input("Day: ").lower() + ".txt"
-    fn = open("students/" + student_num + '/' + student_day, 'r')
-    schedule_lines = fn.read().splitlines()
-    return schedule_lines
-
 # Read in the graph paths
 # Return a tuple with (start, finish, weight)
 def get_graph():
@@ -37,7 +28,7 @@ def set_window(path):
     count = 0
     path_count = []
     dest_list = []
-    colors = ['red', 'orange', 'blue', 'purple', 'pink', 'yellow']
+    colors = ['red', 'orange', 'blue', 'purple', 'green', 'yellow']
     win = get_window()
     for route in path:
         p = Plot(route)
@@ -45,7 +36,8 @@ def set_window(path):
         d = p.setuppath(win, colors[count], count)
         dest_list.append(d)
         count = count + 1
-    p.add_key(win, path_count, dest_list)
+    if count != 0:
+        p.add_key(win, path_count, dest_list)
     win.getMouse()          # click anywhere in the window to close
     win.close()
 
@@ -140,6 +132,7 @@ def start_menu():
     win.getMouse()
     win.close()
     return lines
+
 
 def main():
     path_list = []

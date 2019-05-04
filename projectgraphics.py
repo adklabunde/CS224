@@ -24,6 +24,7 @@ class Plot():
         r.draw(win)
         return r
 
+    # draws a line from point to point
     def draw_line(self, p1, p2, win, color):
         line = Line(Point(p1[0], p1[1]), Point(p2[0], p2[1]))
         line.setWidth(3)
@@ -50,6 +51,7 @@ class Plot():
                 count += 1
         return dest_list
 
+    # labels the destination according to the class number that day
     def plot_destination(self, p1, class_num, win):
         t = Text(Point(p1[0], p1[1]-15), class_num)
         t.setStyle('bold')
@@ -57,6 +59,7 @@ class Plot():
         t.setTextColor('red')
         t.draw(win)
 
+    # adds key to window
     def add_key(self, win, path_count, dest_list):
         r = Rectangle(Point(695, 360), Point(800,500))
         r.setWidth(55)
