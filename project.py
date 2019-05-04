@@ -34,9 +34,18 @@ def get_window():
 
 # sets up graphics
 def set_window(path):
+    count = 0
+    path_count = []
+    dest_list = []
+    colors = ['red', 'orange', 'blue', 'purple', 'pink', 'yellow']
     win = get_window()
-    p = Plot(path)
-    p.setuppath(win)
+    for route in path:
+        p = Plot(route)
+        path_count.append(count)
+        d = p.setuppath(win, colors[count], count)
+        dest_list.append(d)
+        count = count + 1
+    p.add_key(win, path_count, dest_list)
     win.getMouse()          # click anywhere in the window to close
     win.close()
 
@@ -89,7 +98,7 @@ def build_shortest_path(graph, start, target):
 
 # creates the start up window
 def start_menu():
-    win = GraphWin("welcome:)", 800, 500)
+    win = GraphWin("start", 800, 500)
     win.setBackground('dark red')
     stripe = Rectangle(Point(0, 100), Point(800, 250))
     stripe.setFill('black')
@@ -155,9 +164,10 @@ def main():
 
         path_list.append(user_route)
 
+    daylist = []
     for path in path_list:
-        #print path
-        set_window(path)
+        daylist.append(path)
+    set_window(daylist)
 
 if __name__ == '__main__':
     main()
